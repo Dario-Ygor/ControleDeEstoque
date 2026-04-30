@@ -37,104 +37,6 @@
 html { font-size: 15px; scroll-behavior: smooth; }
 body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; overflow-x: hidden; }
 
-/* ══ AUTH SCREENS ══════════════════════════════════════════════════════ */
-.auth-screen {
-  display: none; position: fixed; inset: 0; z-index: 1000;
-  background: var(--bg);
-  align-items: center; justify-content: center;
-  animation: fadeIn 0.3s ease;
-}
-.auth-screen.active { display: flex; }
-.auth-bg-glow {
-  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
-}
-.auth-bg-glow::before {
-  content: ''; position: absolute;
-  width: 600px; height: 600px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(75,141,248,0.12) 0%, transparent 70%);
-  top: -100px; left: -100px;
-}
-.auth-bg-glow::after {
-  content: ''; position: absolute;
-  width: 400px; height: 400px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(38,194,129,0.07) 0%, transparent 70%);
-  bottom: -50px; right: -50px;
-}
-.auth-card {
-  background: var(--bg2); border: 1px solid var(--border2);
-  border-radius: 22px; padding: 40px 38px;
-  width: 100%; max-width: 420px; position: relative; z-index: 1;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
-  animation: modalIn 0.28s cubic-bezier(.4,0,.2,1);
-}
-.auth-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-.auth-logo-dot { width: 12px; height: 12px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 14px var(--accent); }
-.auth-logo-name { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
-.auth-tagline { font-size: 13px; color: var(--text3); margin-bottom: 30px; }
-.auth-title { font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 700; margin-bottom: 20px; }
-.auth-form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
-.auth-form-group label { font-size: 11px; font-weight: 500; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; }
-.auth-form-group input {
-  background: var(--bg3); border: 1px solid var(--border2);
-  color: var(--text); padding: 11px 14px; border-radius: var(--radius);
-  font-size: 14px; font-family: 'DM Sans', sans-serif;
-  transition: border 0.2s, box-shadow 0.2s;
-}
-.auth-form-group input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
-.auth-form-group input::placeholder { color: var(--text3); }
-.auth-submit {
-  width: 100%; padding: 12px; background: var(--accent); border: none;
-  color: #fff; border-radius: var(--radius); font-size: 14px; font-weight: 600;
-  font-family: 'Syne', sans-serif; cursor: pointer; margin-top: 6px;
-  transition: background 0.15s, transform 0.1s; letter-spacing: 0.3px;
-}
-.auth-submit:hover { background: var(--accent2); }
-.auth-submit:active { transform: scale(0.99); }
-.auth-switch { text-align: center; margin-top: 20px; font-size: 13px; color: var(--text2); }
-.auth-switch a { color: var(--accent); cursor: pointer; text-decoration: none; font-weight: 500; }
-.auth-switch a:hover { text-decoration: underline; }
-.auth-error {
-  background: var(--red-bg); border: 1px solid rgba(239,69,69,0.2);
-  color: var(--red); border-radius: var(--radius); padding: 9px 13px;
-  font-size: 13px; margin-bottom: 14px; display: none;
-}
-.auth-error.show { display: block; }
-.auth-divider { display: flex; align-items: center; gap: 12px; margin: 18px 0; color: var(--text3); font-size: 12px; }
-.auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-.demo-hint {
-  background: var(--accent-glow); border: 1px solid rgba(75,141,248,0.18);
-  border-radius: var(--radius); padding: 10px 13px; font-size: 12px;
-  color: var(--text2); margin-top: 16px;
-}
-.demo-hint strong { color: var(--accent); }
-.user-avatar {
-  width: 32px; height: 32px; border-radius: 50%;
-  background: var(--accent-glow); border: 1px solid var(--accent);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 600; color: var(--accent);
-  cursor: pointer; flex-shrink: 0; transition: all 0.15s;
-}
-.user-avatar:hover { background: var(--accent); color: #fff; }
-.user-menu {
-  position: absolute; right: 20px; top: 62px; background: var(--bg2);
-  border: 1px solid var(--border2); border-radius: var(--radius-lg);
-  padding: 8px; min-width: 180px; z-index: 300;
-  box-shadow: var(--shadow); display: none;
-  animation: modalIn 0.15s ease;
-}
-.user-menu.open { display: block; }
-.user-menu-name { padding: 8px 12px 6px; font-size: 13px; font-weight: 500; color: var(--text); }
-.user-menu-email { padding: 0 12px 10px; font-size: 11px; color: var(--text3); border-bottom: 1px solid var(--border); margin-bottom: 6px; }
-.user-menu-item {
-  padding: 8px 12px; border-radius: 8px; font-size: 13px;
-  color: var(--text2); cursor: pointer; transition: all 0.12s;
-  display: flex; align-items: center; gap: 8px;
-}
-.user-menu-item:hover { background: var(--bg3); color: var(--text); }
-.user-menu-item.danger { color: var(--red); }
-.user-menu-item.danger:hover { background: var(--red-bg); }
-
-/* ══ LAYOUT ════════════════════════════════════════════════════════════ */
 .layout { display: flex; min-height: 100vh; }
 
 /* SIDEBAR */
@@ -174,7 +76,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .topbar-left { display: flex; align-items: center; gap: 12px; }
 .menu-toggle { display: none; background: none; border: none; color: var(--text); font-size: 22px; cursor: pointer; padding: 4px; }
 .topbar-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 600; }
-.topbar-right { display: flex; align-items: center; gap: 10px; position: relative; }
+.topbar-right { display: flex; align-items: center; gap: 10px; }
 .search-wrap { position: relative; }
 .search-wrap input {
   background: var(--bg3); border: 1px solid var(--border2);
@@ -207,7 +109,6 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .page { display: none; animation: fadeIn 0.22s ease; }
 .page.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes modalIn { from { opacity: 0; transform: scale(0.96) translateY(12px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
 /* METRICS */
 .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 12px; margin-bottom: 22px; }
@@ -272,11 +173,6 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .prod-card-footer { display: flex; gap: 6px; padding: 0 12px 12px; }
 .prod-card-footer .btn { flex: 1; justify-content: center; font-size: 12px; padding: 6px 8px; }
 
-/* COLOR DOTS on card */
-.prod-card-colors { display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap; }
-.color-dot-sm { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.18); flex-shrink: 0; cursor: default; }
-.color-dot-sm[title]:hover { transform: scale(1.3); transition: transform 0.1s; }
-
 /* TABLE */
 .table-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
 table { width: 100%; border-collapse: collapse; }
@@ -311,6 +207,7 @@ tbody td { padding: 10px 14px; font-size: 13px; vertical-align: middle; }
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
 .modal-overlay.open { display: flex; }
 .modal { background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--radius-xl); width: 100%; max-width: 540px; box-shadow: var(--shadow); animation: modalIn 0.22s cubic-bezier(.4,0,.2,1); overflow: hidden; max-height: 92vh; display: flex; flex-direction: column; }
+@keyframes modalIn { from { opacity: 0; transform: scale(0.96) translateY(12px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 22px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
 .modal-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; }
 .modal-close { background: var(--bg3); border: 1px solid var(--border); color: var(--text2); font-size: 15px; cursor: pointer; padding: 5px 8px; border-radius: 8px; transition: all 0.15s; }
@@ -351,36 +248,6 @@ tbody td { padding: 10px 14px; font-size: 13px; vertical-align: middle; }
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
 .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text3); }
 
-/* COLOR PICKER - FORM */
-.color-picker-wrap { display: flex; flex-direction: column; gap: 8px; }
-.color-input-row { display: flex; gap: 8px; align-items: center; }
-.color-input-row input[type="text"] { flex: 1; }
-.color-swatch-input { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border2); cursor: pointer; padding: 2px; background: var(--bg3); }
-.color-tags { display: flex; flex-wrap: wrap; gap: 6px; min-height: 26px; }
-.color-tag {
-  display: inline-flex; align-items: center; gap: 5px;
-  background: var(--bg4); border: 1px solid var(--border2);
-  border-radius: 99px; padding: 3px 10px 3px 6px;
-  font-size: 12px; color: var(--text2);
-}
-.color-tag-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
-.color-tag-rm { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 13px; padding: 0; line-height: 1; margin-left: 2px; }
-.color-tag-rm:hover { color: var(--red); }
-.color-presets { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 2px; }
-.color-preset-dot {
-  width: 20px; height: 20px; border-radius: 50%;
-  border: 2px solid transparent; cursor: pointer;
-  transition: transform 0.1s, border-color 0.1s;
-}
-.color-preset-dot:hover { transform: scale(1.2); border-color: rgba(255,255,255,0.3); }
-.color-add-btn {
-  background: var(--bg4); border: 1px solid var(--border2);
-  color: var(--text2); padding: 5px 12px; border-radius: var(--radius);
-  font-size: 12px; cursor: pointer; white-space: nowrap;
-  transition: all 0.12s; font-family: 'DM Sans', sans-serif;
-}
-.color-add-btn:hover { background: var(--bg5); color: var(--text); }
-
 /* DETAIL MODAL */
 .detail-modal { max-width: 580px; }
 .detail-img { aspect-ratio: 16/9; background: var(--bg3); display: flex; align-items: center; justify-content: center; font-size: 72px; overflow: hidden; flex-shrink: 0; }
@@ -398,7 +265,7 @@ tbody td { padding: 10px 14px; font-size: 13px; vertical-align: middle; }
 .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
 .detail-row:last-child { border-bottom: none; }
 .detail-row-label { color: var(--text2); }
-.detail-row-val { font-weight: 500; text-align: right; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+.detail-row-val { font-weight: 500; text-align: right; }
 .detail-footer { padding: 14px 22px; border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
 
 /* CHARTS */
@@ -469,72 +336,11 @@ tbody td { padding: 10px 14px; font-size: 13px; vertical-align: middle; }
 @media (max-width: 500px) {
   .products-grid { grid-template-columns: 1fr 1fr; }
   .topbar-right .btn span { display: none; }
-  .auth-card { padding: 28px 22px; }
 }
 </style>
 </head>
 <body>
-
-<!-- ══ TELA DE LOGIN ═══════════════════════════════════════════════════ -->
-<div class="auth-screen active" id="loginScreen">
-  <div class="auth-bg-glow"></div>
-  <div class="auth-card">
-    <div class="auth-logo">
-      <div class="auth-logo-dot"></div>
-      <div class="auth-logo-name">SportStock</div>
-    </div>
-    <div class="auth-tagline">Controle de estoque esportivo</div>
-    <div class="auth-title">Entrar na conta</div>
-    <div class="auth-error" id="loginError"></div>
-    <div class="auth-form-group">
-      <label>E-mail</label>
-      <input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="email" />
-    </div>
-    <div class="auth-form-group">
-      <label>Senha</label>
-      <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password" />
-    </div>
-    <button class="auth-submit" onclick="doLogin()">Entrar</button>
-    <div class="auth-divider">ou</div>
-    <div class="auth-switch">Não tem conta? <a onclick="showRegister()">Criar conta gratuita</a></div>
-    <div class="demo-hint">💡 <strong>Demo:</strong> use qualquer e-mail e senha cadastrados, ou crie uma conta agora.</div>
-  </div>
-</div>
-
-<!-- ══ TELA DE CADASTRO ════════════════════════════════════════════════ -->
-<div class="auth-screen" id="registerScreen">
-  <div class="auth-bg-glow"></div>
-  <div class="auth-card">
-    <div class="auth-logo">
-      <div class="auth-logo-dot"></div>
-      <div class="auth-logo-name">SportStock</div>
-    </div>
-    <div class="auth-tagline">Controle de estoque esportivo</div>
-    <div class="auth-title">Criar nova conta</div>
-    <div class="auth-error" id="regError"></div>
-    <div class="auth-form-group">
-      <label>Nome completo</label>
-      <input type="text" id="regName" placeholder="João Silva" autocomplete="name" />
-    </div>
-    <div class="auth-form-group">
-      <label>E-mail</label>
-      <input type="email" id="regEmail" placeholder="seu@email.com" autocomplete="email" />
-    </div>
-    <div class="auth-form-group">
-      <label>Senha</label>
-      <input type="password" id="regPass" placeholder="Mínimo 6 caracteres" autocomplete="new-password" />
-    </div>
-    <div class="auth-form-group">
-      <label>Confirmar senha</label>
-      <input type="password" id="regPass2" placeholder="Repita a senha" autocomplete="new-password" />
-    </div>
-    <button class="auth-submit" onclick="doRegister()">Criar conta</button>
-    <div class="auth-switch">Já tem conta? <a onclick="showLogin()">Fazer login</a></div>
-  </div>
-</div>
-
-<!-- ══ APP PRINCIPAL ══════════════════════════════════════════════════ -->
-<div class="layout" id="appLayout" style="display:none">
+<div class="layout">
 
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
@@ -549,7 +355,7 @@ tbody td { padding: 10px 14px; font-size: 13px; vertical-align: middle; }
     <div class="nav-item" data-page="alertas" onclick="goPage('alertas')" id="nav-alertas"><span class="nav-icon">⚠</span> Alertas</div>
     <div class="nav-item" data-page="historico" onclick="goPage('historico')"><span class="nav-icon">⏱</span> Histórico</div>
   </nav>
-  <div class="sidebar-footer">SportStock v3.0 · Dados locais</div>
+  <div class="sidebar-footer">SportStock v2.0 · Dados locais</div>
 </aside>
 
 <div class="overlay-bg" id="overlayBg" onclick="closeSidebar()"></div>
@@ -566,17 +372,11 @@ tbody td { padding: 10px 14px; font-size: 13px; vertical-align: middle; }
         <input type="text" id="globalSearch" placeholder="Buscar produto..." oninput="onSearch()" />
       </div>
       <button class="btn btn-primary" onclick="openEditModal()">＋ <span>Produto</span></button>
-      <div class="user-avatar" id="userAvatarBtn" onclick="toggleUserMenu()">?</div>
-      <div class="user-menu" id="userMenu">
-        <div class="user-menu-name" id="userMenuName">—</div>
-        <div class="user-menu-email" id="userMenuEmail">—</div>
-        <div class="user-menu-item" onclick="closeUserMenu()">⚙ Configurações</div>
-        <div class="user-menu-item danger" onclick="doLogout()">↩ Sair</div>
-      </div>
     </div>
   </div>
 
   <div class="content">
+
     <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
       <div class="metrics-grid" id="metricsGrid"></div>
@@ -635,11 +435,12 @@ tbody td { padding: 10px 14px; font-size: 13px; vertical-align: middle; }
       </div>
       <div class="history-list" id="historicoList"></div>
     </div>
+
   </div>
 </main>
 </div>
 
-<!-- ══ MODAL EDITAR/CRIAR ═════════════════════════════════════════════ -->
+<!-- MODAL EDITAR/CRIAR -->
 <div class="modal-overlay" id="editModal">
   <div class="modal">
     <div class="modal-header">
@@ -675,21 +476,6 @@ tbody td { padding: 10px 14px; font-size: 13px; vertical-align: middle; }
         <div class="form-group"><label>Estoque mínimo</label><input type="number" id="fMin" min="0" placeholder="5" /></div>
         <div class="form-group"><label>Preço unitário (R$)</label><input type="number" id="fPrice" min="0" step="0.01" placeholder="0,00" /></div>
         <div class="form-group"><label>Fornecedor</label><input type="text" id="fSupplier" placeholder="Ex: Nike Brasil" /></div>
-
-        <!-- ══ CAMPO DE CORES ══════════════════════════════════════ -->
-        <div class="form-group full">
-          <label>Cores disponíveis</label>
-          <div class="color-picker-wrap">
-            <div class="color-presets" id="colorPresets"></div>
-            <div class="color-input-row">
-              <input type="text" id="fColorText" placeholder="Nome da cor (ex: Azul Royal)" />
-              <input type="color" id="fColorPicker" class="color-swatch-input" value="#4b8df8" title="Selecionar cor" />
-              <button type="button" class="color-add-btn" onclick="addColor()">＋ Adicionar</button>
-            </div>
-            <div class="color-tags" id="colorTagsWrap"></div>
-          </div>
-        </div>
-
         <div class="form-group full"><label>Descrição (opcional)</label><textarea id="fDesc" rows="2" placeholder="Informações adicionais sobre o produto..."></textarea></div>
       </div>
     </div>
@@ -700,7 +486,7 @@ tbody td { padding: 10px 14px; font-size: 13px; vertical-align: middle; }
   </div>
 </div>
 
-<!-- ══ MODAL DETALHE ══════════════════════════════════════════════════ -->
+<!-- MODAL DETALHE -->
 <div class="modal-overlay" id="detailModal">
   <div class="modal detail-modal">
     <div class="modal-header">
@@ -718,96 +504,6 @@ tbody td { padding: 10px 14px; font-size: 13px; vertical-align: middle; }
 <div class="toast-wrap" id="toastWrap"></div>
 
 <script>
-// ══ AUTH ══════════════════════════════════════════════════════════════
-let currentUser = null;
-
-function getUsers() { return JSON.parse(localStorage.getItem('ss_users') || '[]'); }
-function saveUsers(u) { localStorage.setItem('ss_users', JSON.stringify(u)); }
-
-function showLogin()    { document.getElementById('loginScreen').classList.add('active'); document.getElementById('registerScreen').classList.remove('active'); }
-function showRegister() { document.getElementById('registerScreen').classList.add('active'); document.getElementById('loginScreen').classList.remove('active'); }
-
-function doLogin() {
-  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
-  const pass  = document.getElementById('loginPass').value;
-  const errEl = document.getElementById('loginError');
-  errEl.classList.remove('show');
-  if (!email || !pass) { errEl.textContent = 'Preencha e-mail e senha.'; errEl.classList.add('show'); return; }
-  const users = getUsers();
-  const user  = users.find(u => u.email === email && u.pass === btoa(pass));
-  if (!user) { errEl.textContent = 'E-mail ou senha incorretos.'; errEl.classList.add('show'); return; }
-  currentUser = user;
-  localStorage.setItem('ss_session', JSON.stringify({email: user.email, name: user.name}));
-  enterApp();
-}
-
-function doRegister() {
-  const name  = document.getElementById('regName').value.trim();
-  const email = document.getElementById('regEmail').value.trim().toLowerCase();
-  const pass  = document.getElementById('regPass').value;
-  const pass2 = document.getElementById('regPass2').value;
-  const errEl = document.getElementById('regError');
-  errEl.classList.remove('show');
-  if (!name)              { errEl.textContent = 'Informe seu nome.'; errEl.classList.add('show'); return; }
-  if (!email || !email.includes('@')) { errEl.textContent = 'Informe um e-mail válido.'; errEl.classList.add('show'); return; }
-  if (pass.length < 6)   { errEl.textContent = 'A senha deve ter no mínimo 6 caracteres.'; errEl.classList.add('show'); return; }
-  if (pass !== pass2)    { errEl.textContent = 'As senhas não coincidem.'; errEl.classList.add('show'); return; }
-  const users = getUsers();
-  if (users.find(u => u.email === email)) { errEl.textContent = 'Este e-mail já está cadastrado.'; errEl.classList.add('show'); return; }
-  const user = { name, email, pass: btoa(pass) };
-  users.push(user);
-  saveUsers(users);
-  currentUser = user;
-  localStorage.setItem('ss_session', JSON.stringify({email: user.email, name: user.name}));
-  enterApp();
-}
-
-function enterApp() {
-  document.getElementById('loginScreen').classList.remove('active');
-  document.getElementById('registerScreen').classList.remove('active');
-  document.getElementById('appLayout').style.display = 'flex';
-  // update avatar
-  const initials = currentUser.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-  document.getElementById('userAvatarBtn').textContent = initials;
-  document.getElementById('userMenuName').textContent  = currentUser.name;
-  document.getElementById('userMenuEmail').textContent = currentUser.email;
-  renderAll();
-  renderDashboard();
-}
-
-function doLogout() {
-  localStorage.removeItem('ss_session');
-  currentUser = null;
-  document.getElementById('appLayout').style.display = 'none';
-  document.getElementById('userMenu').classList.remove('open');
-  document.getElementById('loginEmail').value = '';
-  document.getElementById('loginPass').value  = '';
-  document.getElementById('loginError').classList.remove('show');
-  showLogin();
-}
-
-function toggleUserMenu() {
-  document.getElementById('userMenu').classList.toggle('open');
-}
-function closeUserMenu() {
-  document.getElementById('userMenu').classList.remove('open');
-}
-document.addEventListener('click', e => {
-  if (!e.target.closest('#userMenu') && !e.target.closest('#userAvatarBtn')) {
-    document.getElementById('userMenu').classList.remove('open');
-  }
-});
-
-// Auto-login se sessão salva
-(function checkSession() {
-  const sess = JSON.parse(localStorage.getItem('ss_session') || 'null');
-  if (sess) {
-    const users = getUsers();
-    const user  = users.find(u => u.email === sess.email);
-    if (user) { currentUser = user; enterApp(); return; }
-  }
-})();
-
 // ══ DATA ══════════════════════════════════════════════════════════════
 const CAT_ICONS = {
   'Calçados':'👟','Roupas':'👕','Equipamentos':'🏋️','Acessórios':'🎒',
@@ -815,31 +511,30 @@ const CAT_ICONS = {
 };
 
 const DEFAULTS = [
-  {id:1,name:'Tênis Nike Air Zoom Pegasus',cat:'Calçados',qty:12,min:5,price:349.90,sku:'TEN-001',supplier:'Nike Brasil',desc:'Tênis de corrida neutro com amortecimento Air Zoom. Ideal para longas distâncias.',img:'',colors:[{name:'Preto',hex:'#111111'},{name:'Branco',hex:'#f5f5f5'},{name:'Azul',hex:'#1a6bbf'}]},
-  {id:2,name:'Camiseta Dry-Fit Masculina',cat:'Roupas',qty:3,min:10,price:79.90,sku:'CAM-002',supplier:'Penalty',desc:'Tecido de alta performance com tecnologia dry-fit. Disponível em P, M, G, GG.',img:'',colors:[{name:'Vermelho',hex:'#e03030'},{name:'Azul',hex:'#3060c8'},{name:'Verde',hex:'#26a060'}]},
-  {id:3,name:'Bola de Futebol Campo Pro',cat:'Equipamentos',qty:0,min:5,price:129.90,sku:'BOL-003',supplier:'Adidas',desc:'Bola oficial tamanho 5, costuras reforçadas e câmara de butil.',img:'',colors:[]},
-  {id:4,name:'Luvas de Ciclismo Shimano',cat:'Ciclismo',qty:18,min:8,price:59.90,sku:'LUV-004',supplier:'Shimano',desc:'Luvas meio dedo com gel de absorção de impacto.',img:'',colors:[{name:'Preto',hex:'#222222'},{name:'Amarelo',hex:'#f0c020'}]},
-  {id:5,name:'Whey Protein Growth 900g',cat:'Suplementos',qty:7,min:10,price:189.90,sku:'WHP-005',supplier:'Growth Supplements',desc:'Whey concentrado com 22g de proteína por porção. Sabor chocolate.',img:'',colors:[]},
-  {id:6,name:'Joelheira Esportiva Neoprene',cat:'Proteção',qty:0,min:5,price:49.90,sku:'JOE-006',supplier:'Kestal',desc:'Joelheira de neoprene com compressão média. Tamanhos P ao GG.',img:'',colors:[{name:'Preto',hex:'#222222'}]},
-  {id:7,name:'Bermuda Compressão Feminina',cat:'Roupas',qty:25,min:10,price:99.90,sku:'BER-007',supplier:'Lupo',desc:'Short de compressão de alta elasticidade com proteção UV50+.',img:'',colors:[{name:'Rosa',hex:'#e87090'},{name:'Roxo',hex:'#8050c8'},{name:'Preto',hex:'#222222'}]},
-  {id:8,name:'Raquete de Tênis Wilson Pro',cat:'Equipamentos',qty:4,min:5,price:299.90,sku:'RAQ-008',supplier:'Wilson',desc:'Raquete intermediária 275g, head 100 pol². Iniciantes e intermediários.',img:'',colors:[]},
-  {id:9,name:'Óculos de Natação Speedo',cat:'Natação',qty:11,min:8,price:89.90,sku:'OCN-009',supplier:'Speedo',desc:'Lente anti-embaçante com proteção UV. Aro de silicone macio.',img:'',colors:[{name:'Azul',hex:'#1a6bbf'},{name:'Vermelho',hex:'#e03030'},{name:'Transparente',hex:'#cccccc'}]},
-  {id:10,name:'Meias Esportivas Cano Longo',cat:'Acessórios',qty:2,min:15,price:24.90,sku:'MEI-010',supplier:'Hanes',desc:'Par de meias compressivas com bordado esportivo e palmilha acolchoada.',img:'',colors:[{name:'Branco',hex:'#f5f5f5'},{name:'Cinza',hex:'#888888'},{name:'Preto',hex:'#222222'}]},
+  {id:1,name:'Tênis Nike Air Zoom Pegasus',cat:'Calçados',qty:12,min:5,price:349.90,sku:'TEN-001',supplier:'Nike Brasil',desc:'Tênis de corrida neutro com amortecimento Air Zoom. Ideal para longas distâncias.',img:''},
+  {id:2,name:'Camiseta Dry-Fit Masculina',cat:'Roupas',qty:3,min:10,price:79.90,sku:'CAM-002',supplier:'Penalty',desc:'Tecido de alta performance com tecnologia dry-fit. Disponível em P, M, G, GG.',img:''},
+  {id:3,name:'Bola de Futebol Campo Pro',cat:'Equipamentos',qty:0,min:5,price:129.90,sku:'BOL-003',supplier:'Adidas',desc:'Bola oficial tamanho 5, costuras reforçadas e câmara de butil.',img:''},
+  {id:4,name:'Luvas de Ciclismo Shimano',cat:'Ciclismo',qty:18,min:8,price:59.90,sku:'LUV-004',supplier:'Shimano',desc:'Luvas meio dedo com gel de absorção de impacto.',img:''},
+  {id:5,name:'Whey Protein Growth 900g',cat:'Suplementos',qty:7,min:10,price:189.90,sku:'WHP-005',supplier:'Growth Supplements',desc:'Whey concentrado com 22g de proteína por porção. Sabor chocolate.',img:''},
+  {id:6,name:'Joelheira Esportiva Neoprene',cat:'Proteção',qty:0,min:5,price:49.90,sku:'JOE-006',supplier:'Kestal',desc:'Joelheira de neoprene com compressão média. Tamanhos P ao GG.',img:''},
+  {id:7,name:'Bermuda Compressão Feminina',cat:'Roupas',qty:25,min:10,price:99.90,sku:'BER-007',supplier:'Lupo',desc:'Short de compressão de alta elasticidade com proteção UV50+.',img:''},
+  {id:8,name:'Raquete de Tênis Wilson Pro',cat:'Equipamentos',qty:4,min:5,price:299.90,sku:'RAQ-008',supplier:'Wilson',desc:'Raquete intermediária 275g, head 100 pol². Iniciantes e intermediários.',img:''},
+  {id:9,name:'Óculos de Natação Speedo',cat:'Natação',qty:11,min:8,price:89.90,sku:'OCN-009',supplier:'Speedo',desc:'Lente anti-embaçante com proteção UV. Aro de silicone macio.',img:''},
+  {id:10,name:'Meias Esportivas Cano Longo',cat:'Acessórios',qty:2,min:15,price:24.90,sku:'MEI-010',supplier:'Hanes',desc:'Par de meias compressivas com bordado esportivo e palmilha acolchoada.',img:''},
 ];
 
-let products = JSON.parse(localStorage.getItem('ss_v3_products') || 'null') || DEFAULTS;
-let history  = JSON.parse(localStorage.getItem('ss_v3_history')  || '[]');
+let products = JSON.parse(localStorage.getItem('ss_v2_products') || 'null') || DEFAULTS;
+let history  = JSON.parse(localStorage.getItem('ss_v2_history')  || '[]');
 let nextId   = Math.max(...products.map(p=>p.id), 0) + 1;
 let editId   = null;
 let curImg   = '';
 let searchQ  = '';
 let viewMode = 'grid';
 let curPage  = 'dashboard';
-let curColors = []; // cores em edição
 
 function save() {
-  localStorage.setItem('ss_v3_products', JSON.stringify(products));
-  localStorage.setItem('ss_v3_history',  JSON.stringify(history.slice(0,300)));
+  localStorage.setItem('ss_v2_products', JSON.stringify(products));
+  localStorage.setItem('ss_v2_history',  JSON.stringify(history.slice(0,300)));
 }
 
 // ══ UTILS ═════════════════════════════════════════════════════════════
@@ -854,60 +549,6 @@ function icon(cat) { return CAT_ICONS[cat]||'📦'; }
 function thumbHtml(p,size=42) {
   if(p.img) return `<img src="${p.img}" alt="" style="width:${size}px;height:${size}px;object-fit:cover;display:block"/>`;
   return icon(p.cat);
-}
-
-// ══ COLOR SYSTEM ══════════════════════════════════════════════════════
-const COLOR_PRESETS = [
-  {name:'Preto',hex:'#222222'},{name:'Branco',hex:'#f5f5f5'},{name:'Cinza',hex:'#888888'},
-  {name:'Vermelho',hex:'#e03030'},{name:'Azul',hex:'#1a6bbf'},{name:'Verde',hex:'#26a060'},
-  {name:'Amarelo',hex:'#f0c020'},{name:'Rosa',hex:'#e87090'},{name:'Roxo',hex:'#8050c8'},
-  {name:'Laranja',hex:'#f07030'},{name:'Marrom',hex:'#7a4828'},{name:'Bege',hex:'#c8a878'},
-];
-
-function initColorPresets() {
-  document.getElementById('colorPresets').innerHTML = COLOR_PRESETS.map(c =>
-    `<div class="color-preset-dot" style="background:${c.hex}" title="${c.name}" onclick="addColorPreset('${c.name}','${c.hex}')"></div>`
-  ).join('');
-}
-
-function addColorPreset(name, hex) {
-  if (curColors.find(c => c.hex === hex)) { toast('Cor já adicionada','info'); return; }
-  curColors.push({name, hex});
-  document.getElementById('fColorPicker').value = hex;
-  document.getElementById('fColorText').value = name;
-  renderColorTags();
-}
-
-function addColor() {
-  const name = document.getElementById('fColorText').value.trim();
-  const hex  = document.getElementById('fColorPicker').value;
-  if (!name) { toast('Informe o nome da cor','error'); return; }
-  if (curColors.find(c => c.name.toLowerCase() === name.toLowerCase())) { toast('Cor já adicionada','info'); return; }
-  curColors.push({name, hex});
-  document.getElementById('fColorText').value = '';
-  renderColorTags();
-}
-
-function removeColor(idx) {
-  curColors.splice(idx, 1);
-  renderColorTags();
-}
-
-function renderColorTags() {
-  document.getElementById('colorTagsWrap').innerHTML = curColors.map((c,i) =>
-    `<span class="color-tag">
-      <span class="color-tag-dot" style="background:${c.hex}"></span>
-      ${c.name}
-      <button class="color-tag-rm" onclick="removeColor(${i})" title="Remover">✕</button>
-    </span>`
-  ).join('');
-}
-
-function colorDotsHtml(colors, small=true) {
-  if (!colors || !colors.length) return '';
-  return colors.map(c =>
-    `<div class="color-dot-sm" style="background:${c.hex}" title="${c.name}"></div>`
-  ).join('');
 }
 
 // ══ NAV ═══════════════════════════════════════════════════════════════
@@ -952,6 +593,7 @@ function renderDashboard() {
     <div class="metric-card blue" style="grid-column:span 2"><div class="metric-icon">💰</div><div class="metric-val" style="font-size:22px">${fmtP(val)}</div><div class="metric-label">Valor total em estoque</div></div>
   `;
 
+  // bar chart
   const cats={};
   products.forEach(p=>{cats[p.cat]=(cats[p.cat]||0)+p.qty*p.price;});
   const sorted=Object.entries(cats).sort((a,b)=>b[1]-a[1]).slice(0,6);
@@ -964,6 +606,7 @@ function renderDashboard() {
       <div class="bar-val">${fmtP(v).replace('R$ ','')}</div>
     </div>`).join('');
 
+  // donut
   const ddata=[{l:'Em estoque',v:ok,c:'#26c281'},{l:'Estoque baixo',v:low,c:'#f0a020'},{l:'Sem estoque',v:out,c:'#ef4545'}];
   const tot=ok+low+out||1;
   const cv=document.getElementById('donutCanvas');
@@ -981,6 +624,7 @@ function renderDashboard() {
   document.getElementById('donutLegend').innerHTML=ddata.map(d=>`
     <div class="legend-item"><div class="legend-dot" style="background:${d.c}"></div><div class="legend-name">${d.l}</div><div class="legend-val">${d.v}</div></div>`).join('');
 
+  // critical
   const crit=products.filter(p=>getStatus(p.qty,p.min)!=='ok').slice(0,4);
   const el=document.getElementById('criticalList');
   if(!crit.length){
@@ -1032,13 +676,12 @@ function renderProdutos() {
   if(!list.length){cont.innerHTML=`<div class="empty-msg"><div class="big-icon">🔍</div>Nenhum produto encontrado.</div>`;return;}
   cont.innerHTML = viewMode==='grid'
     ? `<div class="products-grid">${list.map(prodCard).join('')}</div>`
-    : `<div class="table-card"><table><thead><tr><th>Produto</th><th>Categoria</th><th>Cores</th><th>Quantidade</th><th>Preço</th><th>Status</th><th>Ações</th></tr></thead><tbody>${list.map(prodRow).join('')}</tbody></table></div>`;
+    : `<div class="table-card"><table><thead><tr><th>Produto</th><th>Categoria</th><th>Quantidade</th><th>Preço</th><th>Status</th><th>Ações</th></tr></thead><tbody>${list.map(prodRow).join('')}</tbody></table></div>`;
 }
 
 function prodCard(p) {
   const s=getStatus(p.qty,p.min);
   const imgInner=p.img?`<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block"/>`:`<div style="font-size:50px;color:var(--text3)">${icon(p.cat)}</div>`;
-  const colorsHtml = (p.colors && p.colors.length) ? `<div class="prod-card-colors">${colorDotsHtml(p.colors)}</div>` : '';
   return `<div class="prod-card" onclick="openDetailModal(${p.id})">
     <div class="prod-card-img-wrap">
       <div class="img-inner">${imgInner}</div>
@@ -1047,8 +690,7 @@ function prodCard(p) {
     <div class="prod-card-body">
       <div class="prod-card-cat">${p.cat}</div>
       <div class="prod-card-name">${p.name}</div>
-      ${colorsHtml}
-      <div class="prod-card-meta" style="margin-top:8px">
+      <div class="prod-card-meta">
         <div class="prod-card-price">${fmtP(p.price)}</div>
         <div class="prod-card-qty ${s}">Qtd: ${p.qty}</div>
       </div>
@@ -1062,9 +704,6 @@ function prodCard(p) {
 
 function prodRow(p) {
   const s=getStatus(p.qty,p.min);
-  const colorsCell = (p.colors && p.colors.length)
-    ? `<div style="display:flex;gap:4px;flex-wrap:wrap">${p.colors.map(c=>`<div class="color-dot-sm" style="background:${c.hex}" title="${c.name}"></div>`).join('')}</div>`
-    : '<span style="color:var(--text3);font-size:12px">—</span>';
   return `<tr>
     <td>
       <div class="prod-name-cell">
@@ -1076,7 +715,6 @@ function prodRow(p) {
       </div>
     </td>
     <td><span class="cat-tag">${p.cat}</span></td>
-    <td>${colorsCell}</td>
     <td>
       <div class="qty-control">
         <button class="qty-btn" onclick="adj(${p.id},-1)">−</button>
@@ -1143,16 +781,13 @@ function clearHistory(){if(!confirm('Limpar todo o histórico?'))return;history=
 
 // ══ MODAL EDITAR ══════════════════════════════════════════════════════
 function openEditModal(id) {
-  editId=id||null; curImg=''; curColors=[];
+  editId=id||null; curImg='';
   document.getElementById('editModalTitle').textContent=id?'Editar produto':'Novo produto';
   // reset img
   document.getElementById('uploadPreview').style.display='none';
   document.getElementById('uploadPreview').src='';
   document.getElementById('uploadPH').style.display='';
   document.getElementById('removeImgBtn').style.display='none';
-
-  initColorPresets();
-  renderColorTags();
 
   if(id){
     const p=products.find(x=>x.id===id);
@@ -1164,8 +799,6 @@ function openEditModal(id) {
     document.getElementById('fSku').value=p.sku;
     document.getElementById('fSupplier').value=p.supplier||'';
     document.getElementById('fDesc').value=p.desc||'';
-    curColors = p.colors ? JSON.parse(JSON.stringify(p.colors)) : [];
-    renderColorTags();
     if(p.img){setPreview(p.img);curImg=p.img;}
   } else {
     ['fName','fQty','fMin','fPrice','fSku','fSupplier','fDesc'].forEach(id=>{document.getElementById(id).value='';});
@@ -1189,7 +822,6 @@ function saveProduct(){
     supplier:document.getElementById('fSupplier').value.trim(),
     desc:document.getElementById('fDesc').value.trim(),
     img:curImg,
-    colors:[...curColors],
   };
   if(editId){
     Object.assign(products.find(x=>x.id===editId),obj);
@@ -1210,18 +842,6 @@ function openDetailModal(id){
   document.getElementById('detailImg').innerHTML=p.img
     ?`<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block"/>`
     :`<div style="font-size:80px;opacity:0.35">${icon(p.cat)}</div>`;
-
-  const colorsRow = (p.colors && p.colors.length)
-    ? `<div class="detail-row">
-        <span class="detail-row-label">Cores</span>
-        <span class="detail-row-val">
-          ${p.colors.map(c=>`<span style="display:inline-flex;align-items:center;gap:4px;background:var(--bg4);padding:2px 8px 2px 5px;border-radius:99px;font-size:12px;font-weight:400">
-            <span style="width:10px;height:10px;border-radius:50%;background:${c.hex};flex-shrink:0"></span>${c.name}
-          </span>`).join('')}
-        </span>
-       </div>`
-    : '';
-
   document.getElementById('detailBody').innerHTML=`
     <div class="detail-cat">${p.cat}</div>
     <div class="detail-name">${p.name}</div>
@@ -1237,7 +857,6 @@ function openDetailModal(id){
       <div class="detail-row"><span class="detail-row-label">Valor em estoque</span><span class="detail-row-val">${fmtP(p.qty*p.price)}</span></div>
       <div class="detail-row"><span class="detail-row-label">Categoria</span><span class="detail-row-val">${p.cat}</span></div>
       ${p.supplier?`<div class="detail-row"><span class="detail-row-label">Fornecedor</span><span class="detail-row-val">${p.supplier}</span></div>`:''}
-      ${colorsRow}
     </div>
   `;
   document.getElementById('detailFooter').innerHTML=`
@@ -1309,15 +928,12 @@ function renderAll(){
   if(curPage==='historico')renderHistorico();
 }
 
-// Enter key handlers for auth
-document.getElementById('loginPass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
-document.getElementById('loginEmail').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('loginPass').focus(); });
-document.getElementById('regPass2').addEventListener('keydown', e => { if(e.key==='Enter') doRegister(); });
-document.getElementById('fColorText').addEventListener('keydown', e => { if(e.key==='Enter') { e.preventDefault(); addColor(); } });
-
 document.getElementById('editModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeEditModal();});
 document.getElementById('detailModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeDetailModal();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeEditModal();closeDetailModal();}});
+
+// INIT
+renderDashboard();
 </script>
 </body>
 </html>
